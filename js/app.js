@@ -1,0 +1,72 @@
+'use strict';
+
+var itemListArray = [];
+var previouslyShownUserPageArray = [];
+var currentlyShownUserPageArray = [];
+//////////////////////////////////////////
+////////////// Constructor
+//////////////////////////////////////////
+
+function Item(itemName, itemPath){
+  this.itemName = itemName;
+  this.itemPath = itemPath;
+  this.itemShownTotal = 0;
+  this.numberOfTimesClicked = 0;
+  itemListArray.push(this);
+}
+////////////// Individual items
+//////////////////////////////////////////
+var a = new Item ('bag', 'assets/bag.jpg');
+var b = new Item ('banana', 'assets/banana.jpg');
+var c = new Item ('bathroom', 'assets/bathroom.jpg');
+var d = new Item ('boots', 'assets/boots.jpg');
+var e = new Item ('breakfast', 'assets/breakfast.jpg');
+var f = new Item ('bubblegum', 'assets/bubblegum.jpg');
+var g = new Item ('chair', 'assets/chair.jpg');
+var h = new Item ('chtulu', 'assets/cthulhu.jpg');
+var i = new Item ('dog-duck', 'assets/dog-duck.jpg');
+var j = new Item ('dragon', 'assets/dragon.jpg');
+var k = new Item ('pen', 'assets/pen.jpg');
+var l = new Item ('pet-sweep', 'assets/pet-sweep.jpg');
+var m = new Item ('scissors', 'assets/scissors.jpg');
+var n = new Item ('shark', 'assets/shark.jpg');
+var o = new Item ('sweep', 'assets/sweep.png');
+var p = new Item ('tauntaun', 'assets/tauntaun.jpg');
+var q = new Item ('unicorn', 'assets/unicorn.jpg');
+var r = new Item ('usb', 'assets/usb.gif');
+var s = new Item ('water-can', 'assets/water-can.jpg');
+var t = new Item ('wine glass', 'assets/wine-glass.jpg');
+//old items will fill previouslyShownUserPageArray, currentlyShownUserPageArray will //compare to previouslyShownUserPageArray and have different results. itemListArray will hold list of all items
+
+
+//Random Item Generator
+function randomItemSelectionFunc(){
+  return Math.floor(Math.random() * (itemListArray.length + 1));
+};
+
+//Need to populate three randomItemSelectionVar into currentlyShownUserPageArray[]
+//push a return of randomItemSelectionVar to currentlyShownUserPageArray,
+//until three values inside currentlyShownUserPageArray;
+for(var i = 0; i < 3; i++){
+  var randomItemSelectionVar = randomItemSelectionFunc();
+  if(!previouslyShownUserPageArray.includes(randomItemSelectionVar) && !currentlyShownUserPageArray.includes(randomItemSelectionVar))
+    currentlyShownUserPageArray.push(randomItemSelectionVar);
+}
+previouslyShownUserPageArray = currentlyShownUserPageArray;
+console.log(currentlyShownUserPageArray);
+console.log(previouslyShownUserPageArray);
+
+//need to get index of currentlyShownUserPageArray[] and use the value to select item from itemListArray; and display image
+var imageLeft = itemListArray[currentlyShownUserPageArray.indexOf[0]]; // get itemListArray[](index 1-image)
+var imageCenter = currentlyShownUserPageArray[1];
+var imageRight = currentlyShownUserPageArray[2];
+
+//compare image value itemListArray[] [1(image index)]
+
+//runs randomItemSelectionVar, can't be the same as each other
+//pushes into currentlyShownUserPageArray
+//compares currentlyShownUserPageArray > previouslyShownUserPageArray
+
+
+
+//////////////////////////////////////////
