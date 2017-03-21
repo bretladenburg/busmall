@@ -10,9 +10,12 @@ function Item(itemName, itemPath){
   this.itemName       = itemName;
   this.itemPath       = itemPath;
   this.itemShownTotal = 0;
-  this.numberOfTimesClicked = 0;
   itemListArray.push(this);
+  this.numberOfTimesClicked = 0;
 }
+
+var totalClicks = 0;
+
 ////////////// Individual items
 //////////////////////////////////////////
 var a = new Item ('bag', 'assets/bag.jpg');
@@ -73,25 +76,42 @@ function randomPictureGenerator(){
 }
 randomPictureGenerator();
 
+//click limiter
 //function to increment clicks for numberOfTimesClicked for each item, to be used for event listener
+var clickLimit = 25;
+
+//function to handle user input events to stop after set limit
 function handleTheClick(){
   randomPictureGenerator();
-  this.numberOfTimesClicked++;
+  totalClicks++;
+  var productIdx = this.alt;
+  itemListArray[productIdx].numberOfTimesClicked++;
+
+  if (totalClicks === clickLimit ) {
+    image1.removeEventListener('click', handleTheClick);
+    image2.removeEventListener('click', handleTheClick);
+    image3.removeEventListener('click', handleTheClick);
+    image1.src = "http://i.imgur.com/zugsAYb.gif";
+    image2.src = "http://i.imgur.com/zugsAYb.gif";
+    image3.src = "http://i.imgur.com/zugsAYb.gif"; 
+    itemClickedFunc();
+  }
 }
+
 //adds clicks to the numberOfTimesClicked for each item
 image1.addEventListener("click", handleTheClick);
 image2.addEventListener("click", handleTheClick);
 image3.addEventListener("click", handleTheClick);
 
-
-
-//need to get index of currentlyShownUserPageArray[] and use the value to select item from itemListArray; and display image
-
-//compare image value itemListArray[] [1(image index)]
-
-
-//runs randomItemSelectionVar, can't be the same as each other
-//pushes into currentlyShownUserPageArray
-//compares currentlyShownUserPageArray > previouslyShownUserPageArray
-
-//////////////////////////////////////////
+//show user how many times was clicked
+function itemClickedFunc(){
+  var content = document.getElementById('content');
+  var ul      = document.createElement('ul');
+  content.appendChild(ul);
+  for (var i = 0; i < itemListArray.length; i++){
+    var li = document.createElement('li');
+    var dataStr = itemListArray[i].numberOfTimesClicked + ' clicks for ' + itemListArray[i].itemName;
+    li.innerText = dataStr;
+    ul.appendChild(li);
+  }
+}
