@@ -53,21 +53,37 @@ function randomPictureGenerator(){
     }
   }
   previouslyShownUserPageArray = currentlyShownUserPageArray;
-  var imageLeft   = itemListArray[currentlyShownUserPageArray[0]].itemPath;
-  var imageCenter = itemListArray[currentlyShownUserPageArray[1]].itemPath;
-  var imageRight  = itemListArray[currentlyShownUserPageArray[2]].itemPath;
+  var imageLeft   = itemListArray[currentlyShownUserPageArray[0]];//.itemPath;
+  var imageCenter = itemListArray[currentlyShownUserPageArray[1]];//.itemPath;
+  var imageRight  = itemListArray[currentlyShownUserPageArray[2]];//;.itemPath;
+//assign .src to image to access "source" file from itemPath
+  image1.src = imageLeft.itemPath;
+  image2.src = imageCenter.itemPath;
+  image3.src = imageRight.itemPath;
+
   console.log('current' + currentlyShownUserPageArray);
-  document.getElementById('image1').src = imageLeft;
-  document.getElementById('image2').src = imageCenter;
-  document.getElementById('image3').src = imageRight;
+//increments the itemShownTotal to the Individual item shown
+  imageLeft.itemShownTotal++;
+  imageCenter.itemShownTotal++;
+  imageRight.itemShownTotal++;
+//setting alt attribute so the product that was clicked can be kept trak of
+  image1.alt = currentlyShownUserPageArray[0];
+  image2.alt = currentlyShownUserPageArray[1];
+  image3.alt = currentlyShownUserPageArray[2];
 }
-
-
 randomPictureGenerator();
 
-image1.addEventListener("click", randomPictureGenerator);
-image2.addEventListener("click", randomPictureGenerator);
-image3.addEventListener("click", randomPictureGenerator);
+//function to increment clicks for numberOfTimesClicked for each item, to be used for event listener
+function handleTheClick(){
+  randomPictureGenerator();
+  this.numberOfTimesClicked++;
+}
+//adds clicks to the numberOfTimesClicked for each item
+image1.addEventListener("click", handleTheClick);
+image2.addEventListener("click", handleTheClick);
+image3.addEventListener("click", handleTheClick);
+
+
 
 //need to get index of currentlyShownUserPageArray[] and use the value to select item from itemListArray; and display image
 
