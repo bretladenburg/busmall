@@ -41,27 +41,37 @@ var t = new Item ('wine glass', 'assets/wine-glass.jpg');
 
 //Random Item Generator
 function randomItemSelectionFunc(){
-  return Math.floor(Math.random() * (itemListArray.length + 1));
+  return Math.floor(Math.random() * (itemListArray.length));
 };
 
 //Need to populate three randomItemSelectionVar into currentlyShownUserPageArray[]
 //push a return of randomItemSelectionVar to currentlyShownUserPageArray,
 //until three values inside currentlyShownUserPageArray;
-for(var i = 0; i < 3; i++){
+while(currentlyShownUserPageArray.length < 3){
   var randomItemSelectionVar = randomItemSelectionFunc();
-  if(!previouslyShownUserPageArray.includes(randomItemSelectionVar) && !currentlyShownUserPageArray.includes(randomItemSelectionVar))
+  if(!previouslyShownUserPageArray.includes(randomItemSelectionVar) && !currentlyShownUserPageArray.includes(randomItemSelectionVar)){
     currentlyShownUserPageArray.push(randomItemSelectionVar);
+  }
 }
+
 previouslyShownUserPageArray = currentlyShownUserPageArray;
 console.log(currentlyShownUserPageArray);
 console.log(previouslyShownUserPageArray);
 
 //need to get index of currentlyShownUserPageArray[] and use the value to select item from itemListArray; and display image
-var imageLeft = itemListArray[currentlyShownUserPageArray.indexOf[0]]; // get itemListArray[](index 1-image)
-var imageCenter = currentlyShownUserPageArray[1];
-var imageRight = currentlyShownUserPageArray[2];
+var imageLeft = itemListArray[currentlyShownUserPageArray[0]].itemPath;
+console.log(imageLeft);
 
+var imageCenter = itemListArray[currentlyShownUserPageArray[1]].itemPath;
+console.log(imageCenter);
+
+var imageRight = itemListArray[currentlyShownUserPageArray[2]].itemPath;
+console.log(imageRight);
 //compare image value itemListArray[] [1(image index)]
+
+document.getElementById('image1').src = imageLeft;
+document.getElementById('image2').src = imageCenter;
+document.getElementById('image3').src = imageRight;
 
 //runs randomItemSelectionVar, can't be the same as each other
 //pushes into currentlyShownUserPageArray
