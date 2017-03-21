@@ -1,15 +1,14 @@
 'use strict';
 
 var itemListArray = [];
-var previouslyShownUserPageArray = [];
-var currentlyShownUserPageArray = [];
+
 //////////////////////////////////////////
 ////////////// Constructor
 //////////////////////////////////////////
 
 function Item(itemName, itemPath){
-  this.itemName = itemName;
-  this.itemPath = itemPath;
+  this.itemName       = itemName;
+  this.itemPath       = itemPath;
   this.itemShownTotal = 0;
   this.numberOfTimesClicked = 0;
   itemListArray.push(this);
@@ -38,45 +37,45 @@ var s = new Item ('water-can', 'assets/water-can.jpg');
 var t = new Item ('wine glass', 'assets/wine-glass.jpg');
 //old items will fill previouslyShownUserPageArray, currentlyShownUserPageArray will //compare to previouslyShownUserPageArray and have different results. itemListArray will hold list of all items
 
-
-//Random Item Generator
 function randomItemSelectionFunc(){
   return Math.floor(Math.random() * (itemListArray.length));
 };
 
-//Need to populate three randomItemSelectionVar into currentlyShownUserPageArray[]
-//push a return of randomItemSelectionVar to currentlyShownUserPageArray,
-//until three values inside currentlyShownUserPageArray;
-while(currentlyShownUserPageArray.length < 3){
-  var randomItemSelectionVar = randomItemSelectionFunc();
-  if(!previouslyShownUserPageArray.includes(randomItemSelectionVar) && !currentlyShownUserPageArray.includes(randomItemSelectionVar)){
-    currentlyShownUserPageArray.push(randomItemSelectionVar);
+var previouslyShownUserPageArray  = [];
+
+function randomPictureGenerator(){
+  var currentlyShownUserPageArray   = [];
+  console.log('previous' + previouslyShownUserPageArray);
+  while(currentlyShownUserPageArray.length < 3){
+    var randomItemSelectionVar = randomItemSelectionFunc();
+    if(!previouslyShownUserPageArray.includes(randomItemSelectionVar) && !currentlyShownUserPageArray.includes(randomItemSelectionVar)){
+      currentlyShownUserPageArray.push(randomItemSelectionVar);
+    }
   }
+  previouslyShownUserPageArray = currentlyShownUserPageArray;
+  var imageLeft   = itemListArray[currentlyShownUserPageArray[0]].itemPath;
+  var imageCenter = itemListArray[currentlyShownUserPageArray[1]].itemPath;
+  var imageRight  = itemListArray[currentlyShownUserPageArray[2]].itemPath;
+  console.log('current' + currentlyShownUserPageArray);
+  document.getElementById('image1').src = imageLeft;
+  document.getElementById('image2').src = imageCenter;
+  document.getElementById('image3').src = imageRight;
 }
 
-previouslyShownUserPageArray = currentlyShownUserPageArray;
-console.log(currentlyShownUserPageArray);
-console.log(previouslyShownUserPageArray);
+
+randomPictureGenerator();
+
+image1.addEventListener("click", randomPictureGenerator);
+image2.addEventListener("click", randomPictureGenerator);
+image3.addEventListener("click", randomPictureGenerator);
 
 //need to get index of currentlyShownUserPageArray[] and use the value to select item from itemListArray; and display image
-var imageLeft = itemListArray[currentlyShownUserPageArray[0]].itemPath;
-console.log(imageLeft);
 
-var imageCenter = itemListArray[currentlyShownUserPageArray[1]].itemPath;
-console.log(imageCenter);
-
-var imageRight = itemListArray[currentlyShownUserPageArray[2]].itemPath;
-console.log(imageRight);
 //compare image value itemListArray[] [1(image index)]
 
-document.getElementById('image1').src = imageLeft;
-document.getElementById('image2').src = imageCenter;
-document.getElementById('image3').src = imageRight;
 
 //runs randomItemSelectionVar, can't be the same as each other
 //pushes into currentlyShownUserPageArray
 //compares currentlyShownUserPageArray > previouslyShownUserPageArray
-
-
 
 //////////////////////////////////////////
