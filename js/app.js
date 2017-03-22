@@ -1,8 +1,8 @@
 'use strict';
 
-var itemListArray = [];
+var itemListArray   = [];
 var previouslyShownUserPageArray  = [];
-var labelNameArray = [];
+var labelNameArray  = [];
 var labelClickArray = [];
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
@@ -46,7 +46,6 @@ var t = new Item ('wine glass', 'assets/wine-glass.jpg');
 function randomItemSelectionFunc(){
   return Math.floor(Math.random() * (itemListArray.length));
 };
-
 
 function randomPictureGenerator(){
   var currentlyShownUserPageArray   = [];
@@ -111,45 +110,40 @@ function itemClickedFunc(){
     // ul.appendChild(li);
   }
 
-
 ////////////////////////////////////////////////////////////////////////////////////
 /////////////////////
 ///////////////////// Chart JS Stuff
 /////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
+  for(var i = 0; i < itemListArray.length; i++){
+    labelNameArray.push(itemListArray[i].itemName);
+  };
+  console.log(labelClickArray);
+  console.log(labelNameArray);
 
+  // var itemNumbersClicked = labelClickArray;
 
+  var data = {
+    labels: labelNameArray,
+    datasets: [{
+      label: 'Item Clicked',
+      data: labelClickArray,
+      backgroundColor: 'blue'
+    }]
+  };
 
-
-for(var i = 0; i < itemListArray.length; i++){
-  labelNameArray.push(itemListArray[i].itemName);
-};
-console.log(labelClickArray);
-console.log(labelNameArray);
-
-// var itemNumbersClicked = labelClickArray;
-
-var data = {
-  labels: labelNameArray,
-  datasets: [{
-    label: 'Item Clicked',
-    data: labelClickArray,
-    backgroundColor: 'blue'
-  }]
-};
-
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: data,
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero:true
-        }
-      }]
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
     }
-  }
-});
+  });
 }
