@@ -4,6 +4,7 @@ var itemListArray   = [];
 var previouslyShownUserPageArray  = [];
 var labelNameArray  = [];
 var labelClickArray = [];
+var labelShownArray = [];
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
@@ -53,6 +54,7 @@ function randomPictureGenerator(){
     var randomItemSelectionVar = randomItemSelectionFunc();
     if(!previouslyShownUserPageArray.includes(randomItemSelectionVar) && !currentlyShownUserPageArray.includes(randomItemSelectionVar)){
       currentlyShownUserPageArray.push(randomItemSelectionVar);
+      //labelShownArray.push(itemListArray[i].itemShownTotal);
     }
   }
 
@@ -130,7 +132,9 @@ function itemClickedFunc(){
       label: 'Item Clicked',
       data: labelClickArray,
       backgroundColor: 'blue'
-    }]
+    }
+
+  ]
   };
 
   var myChart = new Chart(ctx, {
